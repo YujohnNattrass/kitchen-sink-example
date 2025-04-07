@@ -2,6 +2,7 @@ import { openai } from "@ai-sdk/openai";
 import { Agent } from "@mastra/core/agent";
 import { memory } from "../memory";
 import { simpleAssTool } from "../tools";
+import { mcpTools } from "../tools/mastra-mcp";
 
 export const myAgent = new Agent({
     name: "my-agent",
@@ -9,6 +10,7 @@ export const myAgent = new Agent({
     model: openai("gpt-4o-mini"),
     memory,
     tools: {
-        simpleAssTool
+        simpleAssTool,
+        ...mcpTools,
     }
 });
