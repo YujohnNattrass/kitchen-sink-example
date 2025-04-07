@@ -1,0 +1,6 @@
+.DS_Store
+.env.*
+.env
+.mastra/
+memory.*
+node_modules/
