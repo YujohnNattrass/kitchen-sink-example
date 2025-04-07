@@ -5,6 +5,8 @@
   "type": "module",
   "scripts": {
     "dev": "mastra dev",
+    "non_cloud_build": "mastra build",
+    "prod_server_start": "cd .mastra && node ./output/index.mjs",
     "mastra": "mastra",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
