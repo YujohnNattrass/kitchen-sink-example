@@ -1,15 +1,29 @@
 import { Mastra } from "@mastra/core/mastra";
 import { registerApiRoute } from "@mastra/core/server";
 import { myAgent } from "./agents";
-import { myWorkflow } from "./workflows";
-import { netlifyDeployer } from "./deployers";
+import { 
+  mySequentialWorkflow, 
+  parallelWorkflow, 
+  branchingWorkflow, 
+  suspendableWorkflow, 
+  guideParentWorkflow
+} from "./workflows";
+import { defaultStorage, defaultVector } from "./storage";
 
 export const mastra = new Mastra({
     agents: {
         myAgent
     },
     workflows: {
-        myWorkflow,
+        mySequentialWorkflow,
+        parallelWorkflow,
+        branchingWorkflow,
+        suspendableWorkflow,
+        guideParentWorkflow,
+    },
+    storage: defaultStorage,
+    vectors: {
+        default: defaultVector,
     },
     server: {
         middleware: [
@@ -31,3 +45,4 @@ export const mastra = new Mastra({
         ]
     },
 });
+

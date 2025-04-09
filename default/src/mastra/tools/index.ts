@@ -1,4 +1,6 @@
 import { createTool } from "@mastra/core/tools";
+import { openai } from '@ai-sdk/openai';
+import { createVectorQueryTool } from "@mastra/rag";
 import { z } from "zod";
 
 export const simpleAssTool = createTool({
@@ -15,4 +17,10 @@ export const simpleAssTool = createTool({
             goodbye: `Goodbye ${context.hello}`
         }
     }
+})
+
+export const queryTool = createVectorQueryTool({
+    vectorStoreName: 'default',
+    indexName: 'kitchenSink',
+    model: openai.embedding("text-embedding-3-small"),
 })
