@@ -9,7 +9,7 @@ import {
   guideParentWorkflow
 } from "./workflows";
 import { defaultStorage, defaultVector } from "./storage";
-import { memoryTestRoutes } from "./routes";
+import { memoryTestRoutes } from "./routes/memory";
 
 export const mastra = new Mastra({
     agents: {
