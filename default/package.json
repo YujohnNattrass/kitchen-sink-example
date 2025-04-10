@@ -9,6 +9,7 @@
     "non_cloud_build": "mastra build",
     "prod_server_start": "cd .mastra && node ./output/index.mjs",
     "deploy": "mastra deploy",
+    "build": "mastra build",
     "mastra": "mastra",
     "test": "echo \"Error: no test specified\" && exit 1"
   },

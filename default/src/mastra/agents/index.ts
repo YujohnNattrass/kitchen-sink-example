@@ -1,7 +1,7 @@
 import { openai } from "@ai-sdk/openai";
 import { Agent } from "@mastra/core/agent";
-import { memory } from "../memory";
-import { queryTool, simpleAssTool } from "../tools";
+import { memory, workingMemory } from "../memory";
+import { queryTool, simpleAssTool, weatherTool } from "../tools";
 import { mcpTools } from "../tools/mastra-mcp";
 import { SummarizationMetric } from "@mastra/evals/llm";
 import {
@@ -58,4 +58,12 @@ export const myAgent = new Agent({
         toneConsistency: new ToneConsistencyMetric(),
         toolArg: new ToolArgMetric(),
     }
+});
+
+export const memoryAgent = new Agent({
+    name: 'Memory Test Agent',
+    instructions: 'You are a helpful AI agent. Always add working memory tags to remember user information.',
+    model: openai('gpt-4o'),
+    memory: workingMemory,
+    tools: { weatherTool },
 });
