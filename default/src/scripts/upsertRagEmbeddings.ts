@@ -200,69 +200,69 @@ async function upsertDocuments() {
         format: 'json'
       }
     },
-    {
-      text: JSON.stringify(customers),
-      metadata: {
-        source: 'retail-store.ts',
-        type: 'retail-data',
-        section: 'customers',
-        format: 'json'
-      }
-    },
-    {
-      text: JSON.stringify(orders),
-      metadata: {
-        source: 'retail-store.ts',
-        type: 'retail-data',
-        section: 'orders',
-        format: 'json'
-      }
-    },
-    {
-      text: JSON.stringify(stores),
-      metadata: {
-        source: 'retail-store.ts',
-        type: 'retail-data',
-        section: 'stores',
-        format: 'json'
-      }
-    },
-    {
-      text: JSON.stringify(inventory),
-      metadata: {
-        source: 'retail-store.ts',
-        type: 'retail-data',
-        section: 'inventory',
-        format: 'json'
-      }
-    },
-    {
-      text: JSON.stringify(promotions),
-      metadata: {
-        source: 'retail-store.ts',
-        type: 'retail-data',
-        section: 'promotions',
-        format: 'json'
-      }
-    },
-    {
-      text: JSON.stringify(categories),
-      metadata: {
-        source: 'retail-store.ts',
-        type: 'retail-data',
-        section: 'categories',
-        format: 'json'
-      }
-    },
-    {
-      text: JSON.stringify(reviews),
-      metadata: {
-        source: 'retail-store.ts',
-        type: 'retail-data',
-        section: 'reviews',
-        format: 'json'
-      }
-    }
+    // {
+    //   text: JSON.stringify(customers),
+    //   metadata: {
+    //     source: 'retail-store.ts',
+    //     type: 'retail-data',
+    //     section: 'customers',
+    //     format: 'json'
+    //   }
+    // },
+    // {
+    //   text: JSON.stringify(orders),
+    //   metadata: {
+    //     source: 'retail-store.ts',
+    //     type: 'retail-data',
+    //     section: 'orders',
+    //     format: 'json'
+    //   }
+    // },
+    // {
+    //   text: JSON.stringify(stores),
+    //   metadata: {
+    //     source: 'retail-store.ts',
+    //     type: 'retail-data',
+    //     section: 'stores',
+    //     format: 'json'
+    //   }
+    // },
+    // {
+    //   text: JSON.stringify(inventory),
+    //   metadata: {
+    //     source: 'retail-store.ts',
+    //     type: 'retail-data',
+    //     section: 'inventory',
+    //     format: 'json'
+    //   }
+    // },
+    // {
+    //   text: JSON.stringify(promotions),
+    //   metadata: {
+    //     source: 'retail-store.ts',
+    //     type: 'retail-data',
+    //     section: 'promotions',
+    //     format: 'json'
+    //   }
+    // },
+    // {
+    //   text: JSON.stringify(categories),
+    //   metadata: {
+    //     source: 'retail-store.ts',
+    //     type: 'retail-data',
+    //     section: 'categories',
+    //     format: 'json'
+    //   }
+    // },
+    // {
+    //   text: JSON.stringify(reviews),
+    //   metadata: {
+    //     source: 'retail-store.ts',
+    //     type: 'retail-data',
+    //     section: 'reviews',
+    //     format: 'json'
+    //   }
+    // }
   ];
 
   for (const data of retailStoreData) {

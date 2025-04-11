@@ -317,50 +317,119 @@ export const mastra = new Mastra({
                     return c.json({ message: 'Hello, world!' });
                 }
             }),
-            registerApiRoute('/test/agent-generate-with-simple-tool', {
+            registerApiRoute('/test/tool-test-1', {
                 method: 'GET',
                 handler: async (c) => {
-                    const mastra = c.get('mastra')
-                    const agent = mastra.getAgent('myAgent')
+                    const testName = 'should generate response with simple tool';
+                    const mastra = c.get('mastra');
+                    const agent = mastra.getAgent('myAgent');
 
-                    const { text, steps } = await agent.generate('Use simple tool and return output')
+                    const { text, steps } = await agent.generate('Use simple tool and return output');
 
                     const initialStep = steps?.[0];
-                    return c.json({ message: text, toolCalls: initialStep?.toolCalls });
+                    const toolCalls = initialStep?.toolCalls;
+
+                    const result = text.length > 0 && 
+                        toolCalls && 
+                        toolCalls.length > 0 && 
+                        toolCalls[0]?.toolName?.includes('simple-ass');
+
+                    return c.json({ 
+                        result, 
+                        testName, 
+                        testData: {
+                            text,
+                            toolCalls
+                        }
+                    }, 200);
                 }
             }),
-            registerApiRoute('/test/agent-generate-with-mcp-docs-tool', {
+            registerApiRoute('/test/tool-test-2', {
                 method: 'GET',
                 handler: async (c) => {
-                    const mastra = c.get('mastra')
-                    const agent = mastra.getAgent('myAgent')
+                    const testName = 'should generate response with MCP docs tool';
+                    const mastra = c.get('mastra');
+                    const agent = mastra.getAgent('myAgent');
 
-                    const { text, steps } = await agent.generate('Use the MCP Docs tool to find out what is Mastra and return output in one sentence')
+                    const { text, steps } = await agent.generate('Use the MCP Docs tool to find out what is Mastra and return output in one sentence');
 
                     const initialStep = steps?.[0];
-                    return c.json({ message: text, toolCalls: initialStep?.toolCalls });
+                    const toolCalls = initialStep?.toolCalls;
+
+                    const result = text.length > 0 && 
+                        toolCalls && 
+                        toolCalls.length > 0 && 
+                        toolCalls[0].toolName.includes('mcp');
+
+                    return c.json({ 
+                        result, 
+                        testName, 
+                        testData: {
+                            text,
+                            toolCalls
+                        }
+                    }, 200);
                 }
             }),
-            registerApiRoute('/test/agent-generate-with-rag-tool', {
+            registerApiRoute('/test/tool-test-3', {
                 method: 'GET',
                 handler: async (c) => {
-                    const mastra = c.get('mastra')
-                    const agent = mastra.getAgent('myAgent')
+                    const testName = 'should generate response with query tool';
+                    const mastra = c.get('mastra');
+                    const agent = mastra.getAgent('myAgent');
 
-                    const { text, steps } = await agent.generate('Use the MCP Docs tool to find out what is Mastra and return output in one sentence')
+                    const { text, steps } = await agent.generate('Use the query tool to find information about electronics products');
 
                     const initialStep = steps?.[0];
-                    return c.json({ message: text, toolCalls: initialStep?.toolCalls });
+                    const toolCalls = initialStep?.toolCalls;
+
+                    const result = text.length > 0 && 
+                        toolCalls && 
+                        toolCalls.length > 0 && 
+                        toolCalls[0]?.toolName?.includes('query');
+
+                    return c.json({ 
+                        result, 
+                        testName, 
+                        testData: {
+                            text,
+                            toolCalls
+                        }
+                    }, 200);
                 }
             }),
-            registerApiRoute('/test/agent-stream-with-simple-tool', {
-                method: 'POST',
+            registerApiRoute('/test/tool-test-4', {
+                method: 'GET',
                 handler: async (c) => {
-                    const mastra = c.get('mastra')
-                    const agent = mastra.getAgent('myAgent')
+                    const testName = 'should stream response with simple tool';
+                    const mastra = c.get('mastra');
+                    const agent = mastra.getAgent('myAgent');
 
-                    const result = await agent.stream('Use simple tool and return output')
-                    return c.json({ message: result?.text, toolCalls: result?.toolCalls });
+                    const stream = await agent.stream('Use simple tool and return output');
+
+                    const chunks: string[] = [];
+                    for await (const chunk of stream.textStream) {
+                        chunks.push(chunk);
+                    }
+                    const response = chunks.join('');
+
+                    // Wait for tool calls to resolve
+                    const toolCalls = await stream.toolCalls;
+
+                    const result = chunks.length > 0 && 
+                        response.length > 0 &&
+                        toolCalls && 
+                        toolCalls.length > 0 && 
+                        toolCalls[0]?.toolName?.includes('simple-ass');
+
+                    return c.json({ 
+                        result, 
+                        testName, 
+                        testData: {
+                            response,
+                            toolCalls
+                        }
+                    }, 200);
                 }
             }),
             memoryTest1,
@@ -368,6 +437,15 @@ export const mastra = new Mastra({
             memoryTest3,
             memoryTest4,
             memoryTest5,
+            registerApiRoute('/test/rag-query1', {
+                method: 'GET',
+                handler: async (c) => {
+                    const mastra = c.get('mastra');
+                    const agent = mastra.getAgent('myAgent');
+                    const { text } = await agent.generate('Use simple tool and return output');
+                    return c.json({ text }, 200);
+                }
+            })
         ]
     },
 });
