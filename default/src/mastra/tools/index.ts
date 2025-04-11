@@ -22,6 +22,7 @@ export const simpleAssTool = createTool({
 export const queryTool = createVectorQueryTool({
     vectorStoreName: 'default',
     indexName: 'kitchenSink',
+    description: 'Query the GlobalMart Retail database for information about products, customers, orders, stores, inventory, promotions, categories, and reviews. You can search for specific items or filter results by various criteria such as price, stock quantity, status, location, etc. Example queries: "Find electronics products", "Show customer C001", "List orders with status shipped", "Check inventory for product P001", "Show active promotions".',
     model: openai.embedding("text-embedding-3-small"),
 })
 
